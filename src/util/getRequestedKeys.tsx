@@ -1,25 +1,8 @@
-import {
-  FieldNode,
-  FragmentSpreadNode,
-  GraphQLResolveInfo,
-  InlineFragmentNode,
-  SelectionNode,
-  SelectionSetNode,
-} from 'graphql';
+import { GraphQLResolveInfo, SelectionSetNode } from 'graphql';
 
-const isFieldNode = (node: SelectionNode): node is FieldNode => {
-  return node.kind === 'Field';
-};
+import { isFieldNode, isFragmentSpreadNode, isInlineFragmentNode } from './typeGuards';
 
-const isFragmentSpreadNode = (node: SelectionNode): node is FragmentSpreadNode => {
-  return node.kind === 'FragmentSpread';
-};
-
-const isInlineFragmentNode = (node: SelectionNode): node is InlineFragmentNode => {
-  return node.kind === 'InlineFragment';
-};
-
-const recursiveGetKeys = (info: GraphQLResolveInfo, selectionSet: SelectionSetNode) => {
+function recursiveGetKeys(info: GraphQLResolveInfo, selectionSet: SelectionSetNode) {
   const keys: string[] = [];
   if (selectionSet.selections) {
     selectionSet.selections.forEach((selectionNode) => {
@@ -33,9 +16,9 @@ const recursiveGetKeys = (info: GraphQLResolveInfo, selectionSet: SelectionSetNo
     });
   }
   return keys;
-};
+}
 
-export const getRequestedKeys = (info: GraphQLResolveInfo): string[] => {
+export function getRequestedKeys(info: GraphQLResolveInfo): string[] {
   const keys: string[] = [];
   info.fieldNodes.forEach((fieldNode) => {
     if (fieldNode.selectionSet) {
@@ -45,4 +28,4 @@ export const getRequestedKeys = (info: GraphQLResolveInfo): string[] => {
   return keys.filter((value, index, self) => {
     return self.indexOf(value) === index;
   });
-};
+}

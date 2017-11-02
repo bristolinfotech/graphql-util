@@ -1,1 +1,1 @@
-export * from './GraphQLResolver';
+export * from './TypedResolvers';

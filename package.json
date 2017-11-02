@@ -1,0 +1,41 @@
+{
+  "name": "@bristolinfotech/graphql-util",
+  "version": "1.0.0",
+  "description": "graphql-util",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bristolinfotech/graphql-util.git"
+  },
+  "scripts": {
+    "build": "rimraf dist && yarn lint && tsc",
+    "start": "concurrently --kill-others --names \"tsc,tslint\" -c \"bold.blue,magenta.bold\" \"yarn watch:typescript\" \"yarn watch:lint\"",
+    "lint": "tslint -t stylish -c tslint.json -p tsconfig.json 'src/**/*.ts' 'src/**/*.tsx'",
+    "watch:typescript": "tsc --watch",
+    "watch:lint": "watch -p \"src/**/*.ts\" -p \"src/**/*.tsx\" -c \"yarn lint\""
+  },
+  "authors": [
+    "Carl Craig <carl@bristolinfotech.com>",
+    "Loki Wijnen <loki@bristolinfotech.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@types/graphql": "^0.11.5",
+    "@types/lodash.merge": "^4.6.3",
+    "graphql": "^0.11.7",
+    "lodash.merge": "^4.6.0",
+    "tslib": "^1.8.0"
+  },
+  "devDependencies": {
+    "@bristolinfotech/tslint-rules": "^1.0.0",
+    "concurrently": "^3.5.0",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3",
+    "watch-cli": "^0.2.2"
+  },
+  "peerDependencies": {
+    "react": ">=15.0.0"
+  }
+}

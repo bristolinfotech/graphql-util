@@ -10,7 +10,3 @@ Installation
 yarn add @bristolinfotech/graphql-util
 ```
 
-Usage
------
-
-...
